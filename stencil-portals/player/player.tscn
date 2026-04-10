@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cps14etqxy0tt"]
+
+[ext_resource type="Script" uid="uid://csnngdcr8rhb6" path="res://player/player.gd" id="1_oul6g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oul6g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oul6g"]
+render_priority = -1
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+stencil_mode = 3
+stencil_flags = 2
+stencil_reference = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oul6g"]
+size = Vector2(1.8, 1)
+orientation = 2
+
+[node name="Player" type="CharacterBody3D" unique_id=1737767770]
+script = ExtResource("1_oul6g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1492539646]
+shape = SubResource("CapsuleShape3D_sh265")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2108021531]
+mesh = SubResource("CapsuleMesh_oul6g")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1556754989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5448015, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=739324483]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraPivot" unique_id=1741289693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.46117324)
+material_override = SubResource("StandardMaterial3D_oul6g")
+mesh = SubResource("PlaneMesh_oul6g")

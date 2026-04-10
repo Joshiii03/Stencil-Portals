@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://g6tt4df7u7lb"]
+
+[ext_resource type="Material" uid="uid://ly3cyexfbuou" path="res://shader/overwrite_shader.tres" id="1_fgrbw"]
+[ext_resource type="Script" uid="uid://cu2hsx7ujefqv" path="res://portal_renderable/portal_renderable.gd" id="1_y51i6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fgrbw"]
+resource_local_to_scene = true
+
+[node name="PortalRenderable" type="MeshInstance3D" unique_id=720846969]
+material_override = ExtResource("1_fgrbw")
+material_overlay = SubResource("ShaderMaterial_fgrbw")
+script = ExtResource("1_y51i6")
