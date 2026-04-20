@@ -42,7 +42,7 @@ size = Vector2(20, 20)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3993496, 0.15022075)
 
 [node name="Portal" parent="." unique_id=809701999 instance=ExtResource("3_nt2wp")]
-transform = Transform3D(1, 0, 0, 0, 0.99827284, 0.058748722, 0, -0.058748722, 0.99827284, 0.44094563, 2.709422, -3.0568361)
+transform = Transform3D(1, 0, 0, 0, 0.99827284, 0.058748722, 0, -0.058748722, 0.99827284, 0.44094563, 1.1757159, -3.0568361)
 material_override = SubResource("StandardMaterial3D_qh04p")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1113057609]
@@ -60,7 +60,7 @@ overwrite_portal = true
 metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 
 [node name="Cilinder(2)" parent="Layer2" unique_id=309856567 instance=ExtResource("2_0ukcc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3950891, 0, -3.756655)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11644626, 0, -4.958853)
 material_override = null
 material_overlay = null
 mesh = SubResource("CylinderMesh_7vc00")
@@ -71,6 +71,7 @@ overwrite_portal = true
 [node name="StaticBody3D" type="StaticBody3D" parent="Layer2/Cilinder(2)" unique_id=605734496]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Layer2/Cilinder(2)/StaticBody3D" unique_id=2015341017]
+transform = Transform3D(1, 0, 0, 0, 0.99970657, -0.0242228, 0, 0.0242228, 0.99970657, 0, 0, 0)
 shape = SubResource("CylinderShape3D_nt2wp")
 
 [node name="Floor" parent="Layer2" unique_id=1236446759 instance=ExtResource("2_0ukcc")]
@@ -118,7 +119,7 @@ color = Color(0.654902, 0.57254905, 0, 1)
 portal_path = NodePath("../../Portal")
 
 [node name="Cube(1)" parent="Layer1" unique_id=720846969 instance=ExtResource("2_0ukcc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2851555, -4.2526655)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2851555, -5.0490856)
 material_override = null
 material_overlay = null
 mesh = SubResource("BoxMesh_nt2wp")

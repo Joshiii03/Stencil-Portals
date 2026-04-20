@@ -11,7 +11,6 @@ stencil_mode = 3
 stencil_flags = 2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_508n2"]
-size = Vector2(5, 5)
 orientation = 2
 
 [node name="Portal" type="MeshInstance3D" unique_id=809701999]

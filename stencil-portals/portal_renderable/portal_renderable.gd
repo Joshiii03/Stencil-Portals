@@ -27,7 +27,7 @@ func set_layer() -> void:
 			var stencil_shader : ShaderMaterial = ShaderMaterial.new()
 			stencil_shader = ShaderMaterial.new()
 			stencil_shader.shader = load("res://shader/schader_scripts/shader" + str(i+1) + ".gdshader")
-			stencil_shader.render_priority = 1
+			stencil_shader.render_priority = 2
 			
 			if portal != null:
 				stencil_shader.set_shader_parameter("portal_coords", portal.global_position)
