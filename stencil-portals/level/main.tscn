@@ -3,14 +3,27 @@
 [ext_resource type="PackedScene" uid="uid://cps14etqxy0tt" path="res://player/player.tscn" id="1_414cb"]
 [ext_resource type="PackedScene" uid="uid://g6tt4df7u7lb" path="res://portal_renderable/portal_renderable.tscn" id="2_0ukcc"]
 [ext_resource type="PackedScene" uid="uid://d244hpyajrnkx" path="res://portal/portal.tscn" id="3_nt2wp"]
+[ext_resource type="Script" uid="uid://cu2hsx7ujefqv" path="res://portal_renderable/portal_renderable.gd" id="4_qh04p"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nt2wp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh04p"]
 resource_local_to_scene = true
 transparency = 1
-depth_draw_mode = 2
-albedo_color = Color(0.7882353, 1, 0.6509804, 0.67058825)
+albedo_color = Color(0.56078434, 1, 0.5764706, 0.54509807)
 stencil_mode = 3
-stencil_flags = 6
+stencil_flags = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_k8f8b"]
+radius = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_7vc00"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nt2wp"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qh04p"]
+size = Vector2(20, 20)
+
+[sub_resource type="PrismMesh" id="PrismMesh_klgnm"]
+size = Vector3(1, 2, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nt2wp"]
 size = Vector2(20, 20)
@@ -23,29 +36,59 @@ size = Vector2(20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ukcc"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_7vc00"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_nt2wp"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh04p"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_qh04p"]
-size = Vector2(20, 20)
-
-[sub_resource type="PrismMesh" id="PrismMesh_klgnm"]
-size = Vector3(1, 2, 1)
-
 [node name="Main" type="Node3D" unique_id=192042535]
 
 [node name="Player" parent="." unique_id=1737767770 instance=ExtResource("1_414cb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37402058, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3993496, 0.15022075)
 
 [node name="Portal" parent="." unique_id=809701999 instance=ExtResource("3_nt2wp")]
-transform = Transform3D(1, 0, 0, 0, 0.99827284, 0.058748722, 0, -0.058748722, 0.99827284, 0.44094563, 1.2261353, -3.6295545)
-material_override = SubResource("StandardMaterial3D_nt2wp")
+transform = Transform3D(1, 0, 0, 0, 0.99827284, 0.058748722, 0, -0.058748722, 0.99827284, 0.44094563, 2.709422, -3.0568361)
+material_override = SubResource("StandardMaterial3D_qh04p")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1113057609]
 transform = Transform3D(1, 0, 0, 0, -0.016265793, 0.99986774, 0, -0.99986774, -0.016265793, 0, 11.674833, 0)
+
+[node name="Layer2" type="Node3D" parent="." unique_id=371797741]
+
+[node name="PortalRenderable" type="MeshInstance3D" parent="Layer2" unique_id=2027275408]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6147637, 1.8603489, -0.8359144)
+mesh = SubResource("CapsuleMesh_k8f8b")
+script = ExtResource("4_qh04p")
+portal_layer = 2
+color = Color(0.69411767, 0.654902, 0.94509804, 1)
+overwrite_portal = true
+metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
+
+[node name="Cilinder(2)" parent="Layer2" unique_id=309856567 instance=ExtResource("2_0ukcc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3950891, 0, -3.756655)
+material_override = null
+material_overlay = null
+mesh = SubResource("CylinderMesh_7vc00")
+portal_layer = 2
+color = Color(1, 0, 0, 1)
+overwrite_portal = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Layer2/Cilinder(2)" unique_id=605734496]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer2/Cilinder(2)/StaticBody3D" unique_id=2015341017]
+shape = SubResource("CylinderShape3D_nt2wp")
+
+[node name="Floor" parent="Layer2" unique_id=1236446759 instance=ExtResource("2_0ukcc")]
+material_override = null
+material_overlay = null
+mesh = SubResource("PlaneMesh_qh04p")
+portal_layer = 2
+color = Color(0.5748151, 0.35655108, 4.736066e-05, 1)
+
+[node name="Triangle" parent="Layer2" unique_id=1498245743 instance=ExtResource("2_0ukcc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7017131, 0.94652915, -0.07875192)
+material_override = null
+material_overlay = null
+mesh = SubResource("PrismMesh_klgnm")
+portal_layer = 2
+texture = "res://assets/icon.svg"
+color = Color(0.74230796, 3.3691526e-07, 0.35686326, 1)
+overwrite_portal = true
 
 [node name="Layer1" type="Node3D" parent="." unique_id=171829369]
 
@@ -54,6 +97,7 @@ material_override = null
 material_overlay = null
 mesh = SubResource("PlaneMesh_nt2wp")
 portal_layer = 1
+texture = "res://assets/icon.svg"
 color = Color(0.23515096, 0.47566175, 0, 1)
 portal_path = NodePath("../../Portal")
 
@@ -86,37 +130,3 @@ portal_path = NodePath("../../Portal")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Layer1/Cube(1)/StaticBody3D" unique_id=80839074]
 shape = SubResource("BoxShape3D_0ukcc")
-
-[node name="Layer2" type="Node3D" parent="." unique_id=371797741]
-
-[node name="Cilinder(2)" parent="Layer2" unique_id=309856567 instance=ExtResource("2_0ukcc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3950891, 0, -4.6516685)
-material_override = null
-material_overlay = null
-mesh = SubResource("CylinderMesh_7vc00")
-portal_layer = 2
-color = Color(1, 0, 0, 1)
-overwrite_portal = true
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Layer2/Cilinder(2)" unique_id=605734496]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer2/Cilinder(2)/StaticBody3D" unique_id=2015341017]
-shape = SubResource("CylinderShape3D_nt2wp")
-
-[node name="Floor" parent="Layer2" unique_id=1236446759 instance=ExtResource("2_0ukcc")]
-material_override = SubResource("StandardMaterial3D_qh04p")
-material_overlay = null
-mesh = SubResource("PlaneMesh_qh04p")
-portal_layer = 2
-color = Color(0.5748151, 0.35655108, 4.736066e-05, 1)
-overwrite_portal = true
-
-[node name="Triangle" parent="Layer2" unique_id=1498245743 instance=ExtResource("2_0ukcc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.784678, 0.94652915, -0.07875192)
-material_override = null
-material_overlay = null
-mesh = SubResource("PrismMesh_klgnm")
-portal_layer = 2
-texture = "res://assets/icon.svg"
-color = Color(0.74230796, 3.3691526e-07, 0.35686326, 1)
-overwrite_portal = true

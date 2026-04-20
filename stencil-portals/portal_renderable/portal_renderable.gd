@@ -39,21 +39,24 @@ func set_layer() -> void:
 			if texture != null:
 				stencil_shader.set_shader_parameter("my_texture", load(texture))
 				stencil_shader.set_shader_parameter("use_texture", true)
-			material_override = stencil_shader
+			
 			
 			if overwrite_portal:
 				var next_material : StandardMaterial3D = StandardMaterial3D.new()
-				next_material.depth_draw_mode =BaseMaterial3D.DEPTH_DRAW_DISABLED
-				next_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				next_material.depth_draw_mode =BaseMaterial3D.DEPTH_DRAW_DISABLED#
+				
+				next_material.transparency =BaseMaterial3D.TRANSPARENCY_ALPHA
+				#transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
+				#next_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS #BaseMaterial3D.TRANSPARENCY_ALPHA
 				next_material.albedo_color = "ffffff00"
-				print(name," ", i+1)
 				next_material.stencil_mode = BaseMaterial3D.STENCIL_MODE_CUSTOM
 				next_material.stencil_reference = i+1
-				next_material.stencil_flags = 2
-				stencil_shader.next_pass = next_material
+				next_material.stencil_flags = BaseMaterial3D.STENCIL_FLAG_WRITE
+				
+				material_override = next_material
+				next_material.next_pass = stencil_shader
+				#stencil_shader.next_pass = next_material
 				#material_override = next_material
 				#material_overlay.next_pass = next_material
-			
-			#material_overlay = null
-			#material_override = null
-			#material_overlay = null
+			else:
+				material_override = stencil_shader

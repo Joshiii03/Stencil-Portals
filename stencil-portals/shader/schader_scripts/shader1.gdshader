@@ -4,6 +4,7 @@ render_mode world_vertex_coords;
 stencil_mode read, 1 ,compare_equal;
 render_mode depth_draw_always;
 
+
 uniform bool switch_side = true;
 uniform vec3 portal_coords;
 uniform vec3 portal_norm;
