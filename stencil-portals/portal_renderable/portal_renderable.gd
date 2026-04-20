@@ -9,10 +9,26 @@ extends MeshInstance3D
 @export var overwrite_portal : bool = false
 var portal
 
+
+var active : bool = false :
+	set(new_value) :
+		active = new_value
+		stencil_shader.set_shader_parameter("use_portal", !active)
+		if override_shader != null:
+			if !active:
+				override_shader.stencil_flags = 0
+			else:
+				override_shader.stencil_flags = BaseMaterial3D.STENCIL_FLAG_WRITE
+
+
 func _ready() -> void:
 	if portal_path != null:
 		portal = get_node(portal_path)
 	set_layer()
+	active = false
+
+var stencil_shader : ShaderMaterial
+var override_shader : StandardMaterial3D
 
 func set_layer() -> void:
 	for child in get_children():
@@ -24,7 +40,8 @@ func set_layer() -> void:
 		var flag = (bits & 1) == 1
 		bits = bits >> 1
 		if flag:
-			var stencil_shader : ShaderMaterial = ShaderMaterial.new()
+			add_to_group("Layer_" + str(i +1))
+			
 			stencil_shader = ShaderMaterial.new()
 			stencil_shader.shader = load("res://shader/schader_scripts/shader" + str(i+1) + ".gdshader")
 			stencil_shader.render_priority = 2
@@ -42,21 +59,15 @@ func set_layer() -> void:
 			
 			
 			if overwrite_portal:
-				var next_material : StandardMaterial3D = StandardMaterial3D.new()
-				next_material.depth_draw_mode =BaseMaterial3D.DEPTH_DRAW_DISABLED#
+				override_shader = StandardMaterial3D.new()
+				override_shader.depth_draw_mode =BaseMaterial3D.DEPTH_DRAW_DISABLED
+				override_shader.transparency =BaseMaterial3D.TRANSPARENCY_ALPHA
+				override_shader.albedo_color = "ffffff00"
+				override_shader.stencil_mode = BaseMaterial3D.STENCIL_MODE_CUSTOM
+				override_shader.stencil_reference = i+1
+				override_shader.stencil_flags = 0# BaseMaterial3D.STENCIL_FLAG_WRITE
 				
-				next_material.transparency =BaseMaterial3D.TRANSPARENCY_ALPHA
-				#transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
-				#next_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS #BaseMaterial3D.TRANSPARENCY_ALPHA
-				next_material.albedo_color = "ffffff00"
-				next_material.stencil_mode = BaseMaterial3D.STENCIL_MODE_CUSTOM
-				next_material.stencil_reference = i+1
-				next_material.stencil_flags = BaseMaterial3D.STENCIL_FLAG_WRITE
-				
-				material_override = next_material
-				next_material.next_pass = stencil_shader
-				#stencil_shader.next_pass = next_material
-				#material_override = next_material
-				#material_overlay.next_pass = next_material
+				material_override = override_shader
+				override_shader.next_pass = stencil_shader
 			else:
 				material_override = stencil_shader

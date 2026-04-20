@@ -7,13 +7,19 @@ const GRAVITY = 9.8
 
 @onready var camera_3d: Camera3D = $CameraPivot/Camera3D
 @onready var camera_pivot: Node3D = $CameraPivot
+@onready var stencil_lence = $CameraPivot/StencilLence
 
 var vertical_look_angle = 0.0
 
 
 func _ready():
-	portal_layer = 1
+	change_layer(2)
 
+func change_layer(new_layer : int) -> void:
+	portal_layer =  new_layer
+	for i in 5:
+		for object in get_tree().get_nodes_in_group("Layer_" + str(i +1)):
+			object.active = i +1 == new_layer
 
 func _physics_process(delta):
 	var input_dir = Vector2(
@@ -60,6 +66,9 @@ var portal_layer : int = 1 :
 	set(new_layer) :
 		if new_layer > 0:
 			var flag_layer : int = 1 << (new_layer -1)
-			portal_layer = new_layer
-			collision_layer = flag_layer
-			collision_mask = flag_layer
+			portal_layer = flag_layer
+			#stencil_lence.stencil_mode = BaseMaterial3D.STENCIL_MODE_CUSTOM
+			stencil_lence.material_override.stencil_reference = portal_layer
+			portal_layer = portal_layer
+			collision_layer = portal_layer + 256 
+			collision_mask = portal_layer + 256 

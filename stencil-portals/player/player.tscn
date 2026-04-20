@@ -21,6 +21,7 @@ size = Vector2(1.8, 1)
 orientation = 2
 
 [node name="Player" type="CharacterBody3D" unique_id=1737767770]
+collision_layer = 257
 script = ExtResource("1_oul6g")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1492539646]
@@ -34,7 +35,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5448015, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=739324483]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraPivot" unique_id=1741289693]
+[node name="StencilLence" type="MeshInstance3D" parent="CameraPivot" unique_id=1741289693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.46117324)
 material_override = SubResource("StandardMaterial3D_oul6g")
 mesh = SubResource("PlaneMesh_oul6g")

@@ -12,6 +12,13 @@ albedo_color = Color(0.56078434, 1, 0.5764706, 0.54509807)
 stencil_mode = 3
 stencil_flags = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8f8b"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0.56078434, 1, 0.5764706, 0.54509807)
+stencil_mode = 3
+stencil_flags = 2
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_k8f8b"]
 radius = 0.2
 
@@ -22,13 +29,13 @@ radius = 0.2
 [sub_resource type="PlaneMesh" id="PlaneMesh_qh04p"]
 size = Vector2(20, 20)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_530py"]
+
 [sub_resource type="PrismMesh" id="PrismMesh_klgnm"]
 size = Vector3(1, 2, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_nt2wp"]
 size = Vector2(20, 20)
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_530py"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_7vc00"]
 
@@ -38,12 +45,14 @@ size = Vector2(20, 20)
 
 [node name="Main" type="Node3D" unique_id=192042535]
 
-[node name="Player" parent="." unique_id=1737767770 instance=ExtResource("1_414cb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3993496, 0.15022075)
-
-[node name="Portal" parent="." unique_id=809701999 instance=ExtResource("3_nt2wp")]
-transform = Transform3D(1, 0, 0, 0, 0.99827284, 0.058748722, 0, -0.058748722, 0.99827284, 0.44094563, 1.1757159, -3.0568361)
+[node name="Portal2" parent="." unique_id=809701999 instance=ExtResource("3_nt2wp")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.7368958, 1.088702, -2.9461033)
 material_override = SubResource("StandardMaterial3D_qh04p")
+portal_layer = 2
+
+[node name="Portal" parent="." unique_id=2026432906 instance=ExtResource("3_nt2wp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44094563, 1.1757159, -3.0568361)
+material_override = SubResource("StandardMaterial3D_k8f8b")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1113057609]
 transform = Transform3D(1, 0, 0, 0, -0.016265793, 0.99986774, 0, -0.99986774, -0.016265793, 0, 11.674833, 0)
@@ -56,6 +65,7 @@ mesh = SubResource("CapsuleMesh_k8f8b")
 script = ExtResource("4_qh04p")
 portal_layer = 2
 color = Color(0.69411767, 0.654902, 0.94509804, 1)
+portal_path = NodePath("../../Portal2")
 overwrite_portal = true
 metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 
@@ -66,6 +76,7 @@ material_overlay = null
 mesh = SubResource("CylinderMesh_7vc00")
 portal_layer = 2
 color = Color(1, 0, 0, 1)
+portal_path = NodePath("../../Portal2")
 overwrite_portal = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Layer2/Cilinder(2)" unique_id=605734496]
@@ -80,6 +91,14 @@ material_overlay = null
 mesh = SubResource("PlaneMesh_qh04p")
 portal_layer = 2
 color = Color(0.5748151, 0.35655108, 4.736066e-05, 1)
+portal_path = NodePath("../../Portal2")
+
+[node name="Floor" type="StaticBody3D" parent="Layer2/Floor" unique_id=1021043563]
+collision_layer = 15
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer2/Floor/Floor" unique_id=1351273447]
+shape = SubResource("WorldBoundaryShape3D_530py")
 
 [node name="Triangle" parent="Layer2" unique_id=1498245743 instance=ExtResource("2_0ukcc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7017131, 0.94652915, -0.07875192)
@@ -89,6 +108,7 @@ mesh = SubResource("PrismMesh_klgnm")
 portal_layer = 2
 texture = "res://assets/icon.svg"
 color = Color(0.74230796, 3.3691526e-07, 0.35686326, 1)
+portal_path = NodePath("../../Portal2")
 overwrite_portal = true
 
 [node name="Layer1" type="Node3D" parent="." unique_id=171829369]
@@ -117,6 +137,7 @@ mesh = SubResource("SphereMesh_7vc00")
 portal_layer = 1
 color = Color(0.654902, 0.57254905, 0, 1)
 portal_path = NodePath("../../Portal")
+overwrite_portal = true
 
 [node name="Cube(1)" parent="Layer1" unique_id=720846969 instance=ExtResource("2_0ukcc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2851555, -5.0490856)
@@ -126,8 +147,12 @@ mesh = SubResource("BoxMesh_nt2wp")
 portal_layer = 1
 color = Color(0.11302628, 0.35715574, 0.8311328, 1)
 portal_path = NodePath("../../Portal")
+overwrite_portal = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Layer1/Cube(1)" unique_id=212331264]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Layer1/Cube(1)/StaticBody3D" unique_id=80839074]
 shape = SubResource("BoxShape3D_0ukcc")
+
+[node name="Player" parent="." unique_id=1737767770 instance=ExtResource("1_414cb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3993496, 0.15022075)
