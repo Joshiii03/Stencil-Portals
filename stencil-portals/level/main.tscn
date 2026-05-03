@@ -46,12 +46,12 @@ size = Vector2(20, 20)
 [node name="Main" type="Node3D" unique_id=192042535]
 
 [node name="Portal2" parent="." unique_id=809701999 instance=ExtResource("3_nt2wp")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.7368958, 1.088702, -2.9461033)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.883606, 1.088702, -3.3167028)
 material_override = SubResource("StandardMaterial3D_qh04p")
 portal_layer = 2
 
 [node name="Portal" parent="." unique_id=2026432906 instance=ExtResource("3_nt2wp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44094563, 1.1757159, -3.0568361)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44094563, 1.1327877, -3.0568361)
 material_override = SubResource("StandardMaterial3D_k8f8b")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1113057609]
