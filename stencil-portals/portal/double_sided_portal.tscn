@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://dmtrgkky4knl1"]
+[gd_scene format=3 uid="uid://cd4mqm1rvmyhd"]
 
-[ext_resource type="Script" uid="uid://btr6ouu72dtdk" path="res://double_sided_portal.gd" id="1_sv0rm"]
+[ext_resource type="Script" uid="uid://btr6ouu72dtdk" path="res://portal/double_sided_portal.gd" id="1_sv0rm"]
 [ext_resource type="PackedScene" uid="uid://d244hpyajrnkx" path="res://portal/portal.tscn" id="2_jneql"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jneql"]
@@ -40,3 +40,6 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=889521842]
 shape = SubResource("BoxShape3D_jneql")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

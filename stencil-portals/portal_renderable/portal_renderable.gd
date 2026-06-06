@@ -1,6 +1,7 @@
 class_name PortalRenderable
 extends MeshInstance3D
 
+#portal layers as flags
 @export_flags_3d_physics var portal_layer : int
 @export_file_path() var texture
 @export var color : Color

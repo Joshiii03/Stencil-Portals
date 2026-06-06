@@ -14,6 +14,7 @@ var vertical_look_angle = 0.0
 
 
 func _ready():
+	$"/root/NodeRegistry".player = self
 	change_layer(2)
 
 func change_layer(new_layer : int) -> void:

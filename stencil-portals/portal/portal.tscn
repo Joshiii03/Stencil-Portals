@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d244hpyajrnkx"]
 
-[ext_resource type="Script" uid="uid://4t0csh7se2yn" path="res://portal.gd" id="1_sfjos"]
+[ext_resource type="Script" uid="uid://4t0csh7se2yn" path="res://portal/portal.gd" id="1_sfjos"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfjos"]
 resource_local_to_scene = true
