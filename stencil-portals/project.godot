@@ -15,6 +15,10 @@ run/main_scene="uid://cqqf80ft524t8"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://assets/icon.svg"
 
+[autoload]
+
+NodeRegistry="*uid://dtvbha164a03b"
+
 [input]
 
 close={

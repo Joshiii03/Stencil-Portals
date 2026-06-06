@@ -4,15 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://g6tt4df7u7lb" path="res://portal_renderable/portal_renderable.tscn" id="2_0ukcc"]
 [ext_resource type="PackedScene" uid="uid://d244hpyajrnkx" path="res://portal/portal.tscn" id="3_nt2wp"]
 [ext_resource type="Script" uid="uid://cu2hsx7ujefqv" path="res://portal_renderable/portal_renderable.gd" id="4_qh04p"]
+[ext_resource type="PackedScene" uid="uid://dmtrgkky4knl1" path="res://portal/double_sided_portal.tscn" id="5_k8f8b"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh04p"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8f8b"]
 resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.56078434, 1, 0.5764706, 0.54509807)
 stencil_mode = 3
 stencil_flags = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8f8b"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7vc00"]
 resource_local_to_scene = true
 transparency = 1
 albedo_color = Color(0.56078434, 1, 0.5764706, 0.54509807)
@@ -47,12 +48,17 @@ size = Vector2(20, 20)
 
 [node name="Portal2" parent="." unique_id=809701999 instance=ExtResource("3_nt2wp")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.883606, 1.088702, -3.3167028)
-material_override = SubResource("StandardMaterial3D_qh04p")
+visible = false
+material_override = SubResource("StandardMaterial3D_k8f8b")
 portal_layer = 2
 
 [node name="Portal" parent="." unique_id=2026432906 instance=ExtResource("3_nt2wp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44094563, 1.1327877, -3.0568361)
-material_override = SubResource("StandardMaterial3D_k8f8b")
+visible = false
+material_override = SubResource("StandardMaterial3D_7vc00")
+
+[node name="TravellablePortal" parent="." unique_id=1290333544 instance=ExtResource("5_k8f8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11522293, 1.1175833, -2.441185)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1113057609]
 transform = Transform3D(1, 0, 0, 0, -0.016265793, 0.99986774, 0, -0.99986774, -0.016265793, 0, 11.674833, 0)
@@ -120,7 +126,6 @@ mesh = SubResource("PlaneMesh_nt2wp")
 portal_layer = 1
 texture = "res://assets/icon.svg"
 color = Color(0.23515096, 0.47566175, 0, 1)
-portal_path = NodePath("../../Portal")
 
 [node name="Floor" type="StaticBody3D" parent="Layer1/Floor" unique_id=1876439973]
 collision_layer = 15
@@ -146,7 +151,7 @@ material_overlay = null
 mesh = SubResource("BoxMesh_nt2wp")
 portal_layer = 1
 color = Color(0.11302628, 0.35715574, 0.8311328, 1)
-portal_path = NodePath("../../Portal")
+portal_path = NodePath("../../TravellablePortal")
 overwrite_portal = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Layer1/Cube(1)" unique_id=212331264]
@@ -155,4 +160,5 @@ overwrite_portal = true
 shape = SubResource("BoxShape3D_0ukcc")
 
 [node name="Player" parent="." unique_id=1737767770 instance=ExtResource("1_414cb")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3993496, 0.15022075)
