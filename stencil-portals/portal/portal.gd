@@ -2,6 +2,13 @@ class_name Portal
 extends MeshInstance3D
 
 
+var portal_layer_1 : int = 1
+var portal_layer_2 : int = 2
+
+@onready var portal_1a : PortalPlane = $Portal1A
+@onready var portal_1b : PortalPlane = $Portal1B
+
+
 # Player what else is there to say.
 var player : Player :
 	get():
@@ -25,17 +32,20 @@ var player_side : bool = false:
 		return false
 
 
-# the layer as int
-@export var portal_layer : int = 1 :
-	set(value):
-		portal_layer = value
-		update_portal_layer()
-
-
-func _ready():
-	update_portal_layer()
+func _process(_delta: float) -> void:
+	print(player_side)
 
 
 func update_portal_layer() -> void:
-	var portal_flags = 1 << (portal_layer -1)
-	material_override.stencil_reference = portal_flags
+	portal_1a.update_portal_layer()
+	portal_1b.update_portal_layer()
+
+
+func _on_area_3d_body_entered(body):
+	if body == player:
+		pass
+
+
+func _on_area_3d_body_exited(body):
+	if body == player:
+		pass

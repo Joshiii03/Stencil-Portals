@@ -1,8 +1,9 @@
-[gd_scene format=3 uid="uid://d244hpyajrnkx"]
+[gd_scene format=3 uid="uid://cd4mqm1rvmyhd"]
 
-[ext_resource type="Script" uid="uid://4t0csh7se2yn" path="res://portal/portal.gd" id="1_sfjos"]
+[ext_resource type="Script" uid="uid://btr6ouu72dtdk" path="res://portal/portal.gd" id="1_sv0rm"]
+[ext_resource type="PackedScene" uid="uid://d244hpyajrnkx" path="res://portal/portal_plane.tscn" id="2_jneql"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfjos"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_508n2"]
 resource_local_to_scene = true
 transparency = 1
 depth_draw_mode = 2
@@ -10,11 +11,35 @@ albedo_color = Color(1, 0, 1, 0.34117648)
 stencil_mode = 3
 stencil_flags = 2
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_508n2"]
-lightmap_size_hint = Vector2i(12, 12)
-orientation = 2
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3c8y"]
+resource_local_to_scene = true
+transparency = 1
+depth_draw_mode = 2
+albedo_color = Color(1, 0, 1, 0.34117648)
+stencil_mode = 3
+stencil_flags = 2
 
-[node name="Portal" type="MeshInstance3D" unique_id=809701999]
-material_override = SubResource("StandardMaterial3D_sfjos")
-mesh = SubResource("PlaneMesh_508n2")
-script = ExtResource("1_sfjos")
+[sub_resource type="BoxShape3D" id="BoxShape3D_jneql"]
+size = Vector3(2, 2, 0.4)
+
+[node name="Portal" type="MeshInstance3D" unique_id=1290333544]
+script = ExtResource("1_sv0rm")
+metadata/_custom_type_script = "uid://4t0csh7se2yn"
+
+[node name="Portal1A" parent="." unique_id=809701999 instance=ExtResource("2_jneql")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0.2)
+material_override = SubResource("StandardMaterial3D_508n2")
+
+[node name="Portal1B" parent="." unique_id=229337244 instance=ExtResource("2_jneql")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+material_override = SubResource("StandardMaterial3D_x3c8y")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=43437302]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=889521842]
+shape = SubResource("BoxShape3D_jneql")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

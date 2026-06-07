@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://cps14etqxy0tt" path="res://player/player.tscn" id="1_414cb"]
 [ext_resource type="PackedScene" uid="uid://g6tt4df7u7lb" path="res://portal_renderable/portal_renderable.tscn" id="2_0ukcc"]
-[ext_resource type="PackedScene" uid="uid://d244hpyajrnkx" path="res://portal/portal.tscn" id="3_nt2wp"]
+[ext_resource type="PackedScene" uid="uid://d244hpyajrnkx" path="res://portal/portal_plane.tscn" id="3_nt2wp"]
 [ext_resource type="Script" uid="uid://cu2hsx7ujefqv" path="res://portal_renderable/portal_renderable.gd" id="4_qh04p"]
-[ext_resource type="PackedScene" uid="uid://cd4mqm1rvmyhd" path="res://portal/double_sided_portal.tscn" id="5_k8f8b"]
+[ext_resource type="PackedScene" uid="uid://cd4mqm1rvmyhd" path="res://portal/portal.tscn" id="5_k8f8b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k8f8b"]
 resource_local_to_scene = true
@@ -69,7 +69,6 @@ transform = Transform3D(1, 0, 0, 0, -0.016265793, 0.99986774, 0, -0.99986774, -0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6147637, 1.8603489, -0.8359144)
 mesh = SubResource("CapsuleMesh_k8f8b")
 script = ExtResource("4_qh04p")
-portal_layer = 1
 color = Color(0.69411767, 0.654902, 0.94509804, 1)
 portal_path = NodePath("../../Portal2")
 overwrite_portal = true
@@ -80,7 +79,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11644626, 0, -4.958853)
 material_override = null
 material_overlay = null
 mesh = SubResource("CylinderMesh_7vc00")
-portal_layer = 2
 color = Color(1, 0, 0, 1)
 portal_path = NodePath("../../Portal2")
 overwrite_portal = true
@@ -95,7 +93,6 @@ shape = SubResource("CylinderShape3D_nt2wp")
 material_override = null
 material_overlay = null
 mesh = SubResource("PlaneMesh_qh04p")
-portal_layer = 2
 color = Color(0.5748151, 0.35655108, 4.736066e-05, 1)
 portal_path = NodePath("../../Portal2")
 
@@ -111,7 +108,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7017131, 0.94652915, -0.078
 material_override = null
 material_overlay = null
 mesh = SubResource("PrismMesh_klgnm")
-portal_layer = 2
 texture = "res://assets/Sprites/icon.svg"
 color = Color(0.74230796, 3.3691526e-07, 0.35686326, 1)
 portal_path = NodePath("../../Portal2")
@@ -123,7 +119,6 @@ overwrite_portal = true
 material_override = null
 material_overlay = null
 mesh = SubResource("PlaneMesh_nt2wp")
-portal_layer = 1
 texture = "res://assets/Sprites/icon.svg"
 color = Color(0.23515096, 0.47566175, 0, 1)
 
@@ -139,7 +134,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7895262, 0, -4.929663)
 material_override = null
 material_overlay = null
 mesh = SubResource("SphereMesh_7vc00")
-portal_layer = 1
 color = Color(0.654902, 0.57254905, 0, 1)
 portal_path = NodePath("../../Portal")
 overwrite_portal = true
@@ -149,7 +143,6 @@ transform = Transform3D(0.9999991, -0.00054485735, 0.0012325381, 0.000551437, 0.
 material_override = null
 material_overlay = null
 mesh = SubResource("BoxMesh_nt2wp")
-portal_layer = 1
 color = Color(0.11302628, 0.35715574, 0.8311328, 1)
 portal_path = NodePath("../../TravellablePortal")
 overwrite_portal = true

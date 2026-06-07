@@ -17,27 +17,29 @@ func _ready():
 	$"/root/NodeRegistry".player = self
 	change_layer(2)
 
+
 func change_layer(new_layer : int) -> void:
 	portal_layer =  new_layer
 	for i in 5:
 		for object in get_tree().get_nodes_in_group("Layer_" + str(i +1)):
 			object.active = i +1 == new_layer
 
+
 func _physics_process(delta):
 	var input_dir = Vector2(
 		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 	).normalized()
-
+	
 	var direction = (camera_pivot.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
+	
 	if direction != Vector3.ZERO:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
 		velocity.x = lerp(velocity.x, 0.0, 0.1)
 		velocity.z = lerp(velocity.z, 0.0, 0.1)
-
+	
 	# Gravity and Jump
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta

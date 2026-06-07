@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d244hpyajrnkx"]
+
+[ext_resource type="Script" uid="uid://4t0csh7se2yn" path="res://portal/portal_plane.gd" id="1_sfjos"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sfjos"]
+resource_local_to_scene = true
+transparency = 1
+depth_draw_mode = 2
+albedo_color = Color(1, 0, 1, 0.34117648)
+stencil_mode = 3
+stencil_flags = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_508n2"]
+lightmap_size_hint = Vector2i(12, 12)
+orientation = 2
+
+[node name="PortalLayer" type="MeshInstance3D" unique_id=809701999]
+material_override = SubResource("StandardMaterial3D_sfjos")
+mesh = SubResource("PlaneMesh_508n2")
+script = ExtResource("1_sfjos")

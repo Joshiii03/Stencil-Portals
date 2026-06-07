@@ -2,7 +2,7 @@ class_name PortalRenderable
 extends MeshInstance3D
 
 #portal layers as flags
-@export_flags_3d_physics var portal_layer : int
+@export_flags_3d_physics var portal_layer_mask : int
 @export_file_path() var texture
 @export var color : Color
 
@@ -34,8 +34,8 @@ var override_shader : StandardMaterial3D
 func set_layer() -> void:
 	for child in get_children():
 		if child.get("collision_layer"):
-			child.collision_layer = portal_layer
-	var bits = portal_layer
+			child.collision_layer = portal_layer_mask
+	var bits : int = portal_layer_mask
 	layers = bits
 	for i in 5:
 		var flag = (bits & 1) == 1

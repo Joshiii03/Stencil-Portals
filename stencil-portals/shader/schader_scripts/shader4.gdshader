@@ -19,7 +19,6 @@ void vertex() {
 }
 
 void fragment() {
-	
 	if(use_portal)
 	{
 		float f;
