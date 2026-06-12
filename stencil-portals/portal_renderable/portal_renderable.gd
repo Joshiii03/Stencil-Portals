@@ -8,18 +8,23 @@ extends MeshInstance3D
 
 @export_node_path() var portal_path
 @export var overwrite_portal : bool = false
-var portal
+var portal : Portal
 
-
+# When active the Player and the PortalRenderable are in the same PortalLayer.
+# this means the PortalRenderable overwrites the layer so it is infront of Portals.
+#other wise  the PortalRenderable doas not write PortalLayers
 var active : bool = false :
 	set(new_value) :
+		
 		active = new_value
-		stencil_shader.set_shader_parameter("use_portal", !active)
+		
+		if (stencil_shader != null):
+			stencil_shader.set_shader_parameter("use_portal", !active)
 		if override_shader != null:
-			if !active:
-				override_shader.stencil_flags = 0
-			else:
+			if active:
 				override_shader.stencil_flags = BaseMaterial3D.STENCIL_FLAG_WRITE
+			else:
+				override_shader.stencil_flags = 0
 
 
 func _ready() -> void:
@@ -32,6 +37,7 @@ var stencil_shader : ShaderMaterial
 var override_shader : StandardMaterial3D
 
 func set_layer() -> void:
+	
 	for child in get_children():
 		if child.get("collision_layer"):
 			child.collision_layer = portal_layer_mask
@@ -44,6 +50,7 @@ func set_layer() -> void:
 			add_to_group("Layer_" + str(i +1))
 			
 			stencil_shader = ShaderMaterial.new()
+			
 			stencil_shader.shader = load("res://shader/schader_scripts/shader" + str(i+1) + ".gdshader")
 			stencil_shader.render_priority = 2
 			
