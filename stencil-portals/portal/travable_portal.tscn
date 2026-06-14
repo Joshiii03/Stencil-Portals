@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 transparency = 1
 depth_draw_mode = 2
-albedo_color = Color(1, 0, 1, 0.34117648)
+albedo_color = Color(1, 0, 1, 0)
 stencil_mode = 3
 stencil_flags = 2
 
@@ -15,12 +15,18 @@ stencil_flags = 2
 resource_local_to_scene = true
 transparency = 1
 depth_draw_mode = 2
-albedo_color = Color(1, 0, 1, 0.34117648)
+albedo_color = Color(1, 0, 1, 0)
 stencil_mode = 3
 stencil_flags = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jneql"]
 size = Vector3(2, 2, 0.4)
+
+[sub_resource type="TorusMesh" id="TorusMesh_ggnhr"]
+inner_radius = 1.2
+outer_radius = 1.7
+rings = 4
+ring_segments = 4
 
 [node name="Portal" type="MeshInstance3D" unique_id=1290333544]
 script = ExtResource("1_sv0rm")
@@ -40,6 +46,10 @@ collision_mask = 256
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=889521842]
 shape = SubResource("BoxShape3D_jneql")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1338077520]
+transform = Transform3D(0.70710677, 1.2802769e-08, 0.70710677, 0.70710677, -3.090862e-08, -0.70710677, 1.2802769e-08, 1, -3.090862e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_ggnhr")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

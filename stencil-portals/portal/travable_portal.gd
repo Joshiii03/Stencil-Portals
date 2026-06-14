@@ -78,7 +78,7 @@ func _on_area_3d_body_exited(body):
 		update_portal_layer()
 
 
-# Is triggered when Player changes side of portal whil standing inside.
+# Is triggered when Player changes side of portal while standing inside.
 # Swaps active PortalLayer
 func player_changed_side():
 	match active_portal_layer:
