@@ -95,8 +95,3 @@ func player_changed_side():
 			PortalLayers.portal_layer_2:
 				player.change_layer(portal_layer_2)
 				active_portal_layer = PortalLayers.portal_layer_1
-
-func _input(event):
-	if event.is_action_pressed("jump"):
-		get_tree().call_group("Layer_" + str(portal_layer), "change_side")
-		get_tree().call_group("Layer_" + str(portal_layer_2), "change_side")

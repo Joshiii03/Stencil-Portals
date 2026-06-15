@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 0
+const JUMP_VELOCITY = 7
 const MOUSE_SENSETIVITY = 0.01
 const GRAVITY = 9.8
 

@@ -45,6 +45,7 @@ var stencil_shader : ShaderMaterial
 var override_shader : StandardMaterial3D
 
 func set_layer() -> void:
+	layers = portal_layer_mask
 	
 	for child in get_children():
 		if child.get("collision_layer"):

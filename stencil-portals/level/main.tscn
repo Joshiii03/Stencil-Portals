@@ -20,9 +20,6 @@ albedo_color = Color(0.56078434, 1, 0.5764706, 0.54509807)
 stencil_mode = 3
 stencil_flags = 2
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_k8f8b"]
-radius = 0.2
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_7vc00"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nt2wp"]
@@ -47,6 +44,12 @@ size = Vector2(20, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0ukcc"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_k8f8b"]
+radius = 0.2
+
+[sub_resource type="Environment" id="Environment_k8f8b"]
+ambient_light_source = 1
+
 [node name="Main" type="Node3D" unique_id=192042535]
 
 [node name="Portal2" parent="." unique_id=809701999 instance=ExtResource("3_nt2wp")]
@@ -62,20 +65,7 @@ material_override = SubResource("StandardMaterial3D_7vc00")
 [node name="TravellablePortal" parent="." unique_id=1290333544 instance=ExtResource("5_k8f8b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11522293, 1.2926035, -2.441185)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1113057609]
-transform = Transform3D(1, 0, 0, 0, -0.016265793, 0.99986774, 0, -0.99986774, -0.016265793, 0, 11.674833, 0)
-
 [node name="Layer2" type="Node3D" parent="." unique_id=371797741]
-
-[node name="PortalRenderable" type="MeshInstance3D" parent="Layer2" unique_id=2027275408]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4782238, 1.8603489, 1.066277)
-mesh = SubResource("CapsuleMesh_k8f8b")
-script = ExtResource("4_qh04p")
-portal_layer_mask = 1
-color = Color(0.69411767, 0.654902, 0.94509804, 1)
-portal_path = NodePath("../../TravellablePortal")
-overwrite_portal = true
-metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 
 [node name="Cilinder(2)" parent="Layer2" unique_id=309856567 instance=ExtResource("2_0ukcc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11644626, 0, -4.958853)
@@ -98,7 +88,7 @@ material_override = null
 material_overlay = null
 mesh = SubResource("PlaneMesh_qh04p")
 portal_layer_mask = 2
-color = Color(0.5748151, 0.35655108, 4.736066e-05, 1)
+color = Color(0.21804762, 0.6560053, 5.7756904e-07, 1)
 
 [node name="Floor" type="StaticBody3D" parent="Layer2/Floor" unique_id=1021043563]
 collision_layer = 15
@@ -124,6 +114,11 @@ overwrite_portal = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010437012, 0)
 shape = SubResource("BoxShape3D_k8f8b")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Layer2" unique_id=1113057609]
+transform = Transform3D(1, 0, 0, 0, 0.39291495, 0.91957486, 0, -0.91957486, 0.39291495, 0, 11.674833, 2.8317575)
+layers = 2
+light_cull_mask = 4294966274
+
 [node name="Layer1" type="Node3D" parent="." unique_id=171829369]
 
 [node name="Floor" parent="Layer1" unique_id=1075544877 instance=ExtResource("2_0ukcc")]
@@ -132,7 +127,7 @@ material_overlay = null
 mesh = SubResource("PlaneMesh_nt2wp")
 portal_layer_mask = 1
 texture = "res://assets/Sprites/icon.svg"
-color = Color(0.23515096, 0.47566175, 0, 1)
+color = Color(0.22733918, 0.46343833, 0.92888296, 1)
 portal_path = NodePath("../../TravellablePortal")
 
 [node name="Floor" type="StaticBody3D" parent="Layer1/Floor" unique_id=1876439973]
@@ -167,6 +162,26 @@ overwrite_portal = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Layer1/Cube(1)/StaticBody3D" unique_id=80839074]
 shape = SubResource("BoxShape3D_0ukcc")
 
+[node name="PortalRenderable" type="MeshInstance3D" parent="Layer1" unique_id=2027275408]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4782238, 1.8603489, 1.066277)
+mesh = SubResource("CapsuleMesh_k8f8b")
+script = ExtResource("4_qh04p")
+portal_layer_mask = 1
+color = Color(0.69411767, 0.654902, 0.94509804, 1)
+portal_path = NodePath("../../TravellablePortal")
+overwrite_portal = true
+metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Layer1" unique_id=1190784530]
+transform = Transform3D(1, 0, 0, 0, -0.017784016, 0.99984187, 0, -0.99984187, -0.017784016, 0, 3.873742, -2.4911213)
+light_color = Color(0.827451, 1, 1, 1)
+light_energy = 2.0
+spot_range = 10.856879
+spot_angle = 65.61467
+
 [node name="Player" parent="." unique_id=1737767770 instance=ExtResource("1_414cb")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4648433, 1.7652216)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1612647525]
+environment = SubResource("Environment_k8f8b")
