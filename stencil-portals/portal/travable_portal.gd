@@ -69,7 +69,7 @@ func update_portal_layer() -> void:
 func _on_area_3d_body_entered(body):
 	if body == player:
 		player_inside = true
-		print("player inside")
+		update_portal_layer()
 
 
 func _on_area_3d_body_exited(body):
@@ -89,6 +89,3 @@ func player_changed_side():
 		PortalLayers.portal_layer_2:
 			player.change_layer(portal_layer_2)
 			active_portal_layer = PortalLayers.portal_layer_1
-			
-	
-	print("Player changed side")
