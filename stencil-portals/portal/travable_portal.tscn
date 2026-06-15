@@ -22,11 +22,17 @@ stencil_flags = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_jneql"]
 size = Vector3(2, 2, 0.4)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggnhr"]
+albedo_color = Color(0.5862609, 0.004099007, 0.9730815, 1)
+
 [sub_resource type="TorusMesh" id="TorusMesh_ggnhr"]
 inner_radius = 1.2
 outer_radius = 1.7
 rings = 4
 ring_segments = 4
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1f54j"]
+size = Vector3(0.3, 2, 0.3)
 
 [node name="Portal" type="MeshInstance3D" unique_id=1290333544]
 script = ExtResource("1_sv0rm")
@@ -49,7 +55,24 @@ shape = SubResource("BoxShape3D_jneql")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1338077520]
 transform = Transform3D(0.70710677, 1.2802769e-08, 0.70710677, 0.70710677, -3.090862e-08, -0.70710677, 1.2802769e-08, 1, -3.090862e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ggnhr")
 mesh = SubResource("TorusMesh_ggnhr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=907519521]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1337225315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_1f54j")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=221833475]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+shape = SubResource("BoxShape3D_1f54j")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D" unique_id=806590734]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_1f54j")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

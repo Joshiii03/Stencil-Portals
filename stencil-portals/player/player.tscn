@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://csnngdcr8rhb6" path="res://player/player.gd" id="1_oul6g"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+height = 1.8
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_oul6g"]
 
