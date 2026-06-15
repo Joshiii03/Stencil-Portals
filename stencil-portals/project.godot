@@ -19,6 +19,10 @@ config/icon="res://assets/Sprites/icon.svg"
 
 NodeRegistry="*uid://dtvbha164a03b"
 
+[global_group]
+
+Portal=""
+
 [input]
 
 close={

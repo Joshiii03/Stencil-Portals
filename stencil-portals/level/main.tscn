@@ -25,7 +25,7 @@ stencil_flags = 2
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nt2wp"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_qh04p"]
-size = Vector2(20, 20)
+size = Vector2(50, 50)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_530py"]
 
@@ -34,19 +34,6 @@ size = Vector3(1, 2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8f8b"]
 size = Vector3(1, 2.0877686, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j70lj"]
-albedo_color = Color(9.62615e-07, 0.4963146, 0.6853027, 1)
-emission_enabled = true
-emission = Color(0.31884435, 0.58054346, 0.72491455, 1)
-emission_energy_multiplier = 2.45
-
-[sub_resource type="SphereMesh" id="SphereMesh_ry1g7"]
-flip_faces = true
-radius = 20.0
-height = 40.0
-radial_segments = 12
-rings = 12
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klgnm"]
 emission_enabled = true
@@ -70,6 +57,13 @@ size = Vector2(20, 20)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_k8f8b"]
 radius = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_klgnm"]
+flip_faces = true
+radius = 20.0
+height = 40.0
+radial_segments = 12
+rings = 12
 
 [sub_resource type="Environment" id="Environment_k8f8b"]
 ambient_light_source = 1
@@ -112,7 +106,7 @@ material_override = null
 material_overlay = null
 mesh = SubResource("PlaneMesh_qh04p")
 portal_layer_mask = 2
-texture = "res://assets/Sprites/new_noise_texture_2d.tres"
+texture = "res://assets/Sprites/grass.tres"
 color = Color(0.21804762, 0.6560053, 5.7756904e-07, 1)
 
 [node name="Floor" type="StaticBody3D" parent="Layer2/Floor" unique_id=1021043563]
@@ -144,11 +138,6 @@ transform = Transform3D(1, 0, 0, 0, 0.39291495, 0.91957486, 0, -0.91957486, 0.39
 layers = 2
 light_cull_mask = 4294966274
 
-[node name="SkyTest" type="MeshInstance3D" parent="Layer2" unique_id=1479700126]
-visible = false
-material_override = SubResource("StandardMaterial3D_j70lj")
-mesh = SubResource("SphereMesh_ry1g7")
-
 [node name="Sky" type="MeshInstance3D" parent="Layer2" unique_id=823163398]
 material_override = SubResource("StandardMaterial3D_klgnm")
 mesh = SubResource("SphereMesh_k8f8b")
@@ -165,7 +154,7 @@ material_override = null
 material_overlay = null
 mesh = SubResource("PlaneMesh_nt2wp")
 portal_layer_mask = 1
-texture = "res://assets/Sprites/icon.svg"
+texture = "res://assets/Sprites/Wood.tres"
 color = Color(0.22733918, 0.46343833, 0.92888296, 1)
 portal_path = NodePath("../../TravellablePortal")
 
@@ -217,6 +206,14 @@ light_color = Color(0.827451, 1, 1, 1)
 light_energy = 2.0
 spot_range = 10.856879
 spot_angle = 65.61467
+
+[node name="Sky" type="MeshInstance3D" parent="Layer1" unique_id=2067748316]
+mesh = SubResource("SphereMesh_klgnm")
+script = ExtResource("4_qh04p")
+portal_layer_mask = 1
+portal_path = NodePath("../../TravellablePortal")
+emit_light = true
+metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 
 [node name="Player" parent="." unique_id=1737767770 instance=ExtResource("1_414cb")]
 unique_name_in_owner = true

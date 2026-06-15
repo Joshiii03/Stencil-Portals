@@ -32,40 +32,50 @@ var last_player_side : bool = true :
 		last_player_side = new_value
 
 
+func _ready():
+	update_portal_layer()
+
+
 func _process(_delta: float) -> void:
 	#if player_inside:
 	last_player_side = player_side
 
 
+var last_update : int = 0 
+
 # Will be called when PortalLayer is changed
 func update_portal_layer() -> void:
-	if player_inside:
-		match active_portal_layer:
-			PortalLayers.portal_layer_1:
-				if player_side:
-					portal_1a.portal_layer = portal_layer_2
-					portal_1b.portal_layer = portal_layer
-				else:
+	if portal_1a != null and portal_1b != null and last_update < Time.get_ticks_msec() + 10:
+		if player_inside:
+			match active_portal_layer:
+				PortalLayers.portal_layer_1:
+					if player_side:
+						portal_1a.portal_layer = portal_layer_2
+						portal_1b.portal_layer = portal_layer
+					else:
+						portal_1a.portal_layer = portal_layer
+						portal_1b.portal_layer = portal_layer_2
+				PortalLayers.portal_layer_2:
+					if player_side:
+						portal_1a.portal_layer = portal_layer
+						portal_1b.portal_layer = portal_layer_2
+					else:
+						portal_1a.portal_layer = portal_layer_2
+						portal_1b.portal_layer = portal_layer
+		else:
+			match active_portal_layer:
+				PortalLayers.portal_layer_1:
+					print(portal_1a)
 					portal_1a.portal_layer = portal_layer
-					portal_1b.portal_layer = portal_layer_2
-			PortalLayers.portal_layer_2:
-				if player_side:
-					portal_1a.portal_layer = portal_layer
-					portal_1b.portal_layer = portal_layer_2
-				else:
-					portal_1a.portal_layer = portal_layer_2
 					portal_1b.portal_layer = portal_layer
-	else:
-		match active_portal_layer:
-			PortalLayers.portal_layer_1:
-				portal_1a.portal_layer = portal_layer
-				portal_1b.portal_layer = portal_layer
-			PortalLayers.portal_layer_2:
-				portal_1a.portal_layer = portal_layer_2
-				portal_1b.portal_layer = portal_layer_2
-	
-	portal_1a.update_portal_layer()
-	portal_1b.update_portal_layer()
+				PortalLayers.portal_layer_2:
+					portal_1a.portal_layer = portal_layer_2
+					portal_1b.portal_layer = portal_layer_2
+		
+		portal_1a.update_portal_layer()
+		portal_1b.update_portal_layer()
+		last_update = Time.get_ticks_msec()
+		get_tree().call_group("Portal", "update_portal_layer")
 
 
 func _on_area_3d_body_entered(body):

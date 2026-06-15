@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://d3rco4e0mhi2e"]
+
+[ext_resource type="PackedScene" uid="uid://cd4mqm1rvmyhd" path="res://portal/travable_portal.tscn" id="1_yu52m"]
+[ext_resource type="Script" uid="uid://cu2hsx7ujefqv" path="res://portal_renderable/portal_renderable.gd" id="2_11ehv"]
+[ext_resource type="PackedScene" uid="uid://cps14etqxy0tt" path="res://player/player.tscn" id="3_eweh1"]
+
+[sub_resource type="Environment" id="Environment_11ehv"]
+ambient_light_source = 1
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eweh1"]
+size = Vector2(20, 20)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_eweh1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_utbpa"]
+size = Vector2(20, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nok4a"]
+size = Vector2(20, 20)
+
+[node name="DoublePortalTest" type="Node3D" unique_id=202171139]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2136556533]
+environment = SubResource("Environment_11ehv")
+
+[node name="Layer1" type="Node3D" parent="." unique_id=1735116472]
+
+[node name="Floor1" type="MeshInstance3D" parent="Layer1" unique_id=1576939429]
+mesh = SubResource("PlaneMesh_eweh1")
+script = ExtResource("2_11ehv")
+portal_layer_mask = 1
+color = Color(0, 1, 0, 1)
+metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Layer1/Floor1" unique_id=577930275]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer1/Floor1/StaticBody3D" unique_id=753653901]
+shape = SubResource("WorldBoundaryShape3D_eweh1")
+
+[node name="Layer2" type="Node3D" parent="." unique_id=624763863]
+
+[node name="Floor2" type="MeshInstance3D" parent="Layer2" unique_id=2008479188]
+mesh = SubResource("PlaneMesh_utbpa")
+script = ExtResource("2_11ehv")
+portal_layer_mask = 2
+color = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Layer2/Floor2" unique_id=2108452862]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer2/Floor2/StaticBody3D" unique_id=327786097]
+shape = SubResource("WorldBoundaryShape3D_eweh1")
+
+[node name="Layer3" type="Node3D" parent="." unique_id=2119972382]
+
+[node name="Floor3" type="MeshInstance3D" parent="Layer3" unique_id=961166]
+mesh = SubResource("PlaneMesh_nok4a")
+script = ExtResource("2_11ehv")
+portal_layer_mask = 4
+color = Color(0, 0, 1, 1)
+metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Layer3/Floor3" unique_id=1392919955]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer3/Floor3/StaticBody3D" unique_id=68557911]
+shape = SubResource("WorldBoundaryShape3D_eweh1")
+
+[node name="Player" parent="." unique_id=1737767770 instance=ExtResource("3_eweh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3795464, 1.6353428)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1574510991]
+transform = Transform3D(1, 0, 0, 0, 0.030364094, 0.9995389, 0, -0.9995389, 0.030364094, 0, 4.622805, 0)
+
+[node name="Portal" parent="." unique_id=1290333544 instance=ExtResource("1_yu52m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.290542, 1.5, 0)
+portal_layer_2 = 3
+
+[node name="Portal2" parent="." unique_id=2033027869 instance=ExtResource("1_yu52m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4581118, 1.5, 0)
+portal_layer_2 = 3

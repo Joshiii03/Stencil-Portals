@@ -41,7 +41,7 @@ size = Vector3(0.3, 2, 0.3)
 script = ExtResource("1_sv0rm")
 metadata/_custom_type_script = "uid://4t0csh7se2yn"
 
-[node name="Portal1A" parent="." unique_id=809701999 instance=ExtResource("2_jneql")]
+[node name="Portal1A" parent="." unique_id=809701999 groups=["Portal"] instance=ExtResource("2_jneql")]
 transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0.2)
 material_override = SubResource("StandardMaterial3D_1f54j")
 
