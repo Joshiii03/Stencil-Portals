@@ -99,7 +99,6 @@ material_overlay = null
 mesh = SubResource("PlaneMesh_qh04p")
 portal_layer_mask = 2
 color = Color(0.5748151, 0.35655108, 4.736066e-05, 1)
-portal_path = NodePath("../../Portal2")
 
 [node name="Floor" type="StaticBody3D" parent="Layer2/Floor" unique_id=1021043563]
 collision_layer = 15

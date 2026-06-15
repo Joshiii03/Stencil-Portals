@@ -84,7 +84,6 @@ func _on_area_3d_body_exited(body):
 # Swaps active PortalLayer
 func player_changed_side():
 	if not player_inside:
-		print("swap")
 		get_tree().call_group("Layer_" + str(portal_layer), "change_side")
 		get_tree().call_group("Layer_" + str(portal_layer_2), "change_side")
 	else:
