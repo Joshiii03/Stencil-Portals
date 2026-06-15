@@ -15,6 +15,8 @@ uniform sampler2D my_texture;
 uniform bool use_texture = false;
 varying vec3 v_vertex;
 
+uniform bool disable_lighting = false;
+
 void vertex() {
 	v_vertex = VERTEX;
 }
@@ -35,6 +37,7 @@ void fragment() {
 		ALPHA *= f;
 	}
 	
+	/*
 	if (use_texture)
 	{
 		vec4 tex = texture(my_texture, UV);
@@ -42,4 +45,26 @@ void fragment() {
 	}
 	else
 		ALBEDO = color;
+	*/
+	
+	vec3 final_color;
+	if (use_texture)
+	{
+	    vec4 tex = texture(my_texture, UV);
+	    final_color = tex.rgb;
+	}
+	else
+	{
+	    final_color = color;
+	}
+
+	if (disable_lighting)
+	{
+	    ALBEDO = vec3(0.0);
+	    EMISSION = final_color;
+	}
+	else
+	{
+	    ALBEDO = final_color;
+	}
 }
