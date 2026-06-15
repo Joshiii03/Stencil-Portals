@@ -33,6 +33,14 @@ func _ready() -> void:
 	set_layer()
 	active = false
 
+
+func change_side() -> void:
+	if stencil_shader != null:
+		var old_value = stencil_shader.get_shader_parameter("switch_side")
+		if old_value is bool:
+			stencil_shader.set_shader_parameter("switch_side", not old_value)
+
+
 var stencil_shader : ShaderMaterial
 var override_shader : StandardMaterial3D
 

@@ -35,6 +35,9 @@ size = Vector2(20, 20)
 [sub_resource type="PrismMesh" id="PrismMesh_klgnm"]
 size = Vector3(1, 2, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_k8f8b"]
+size = Vector3(1, 2.0877686, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_nt2wp"]
 size = Vector2(20, 20)
 
@@ -57,7 +60,7 @@ visible = false
 material_override = SubResource("StandardMaterial3D_7vc00")
 
 [node name="TravellablePortal" parent="." unique_id=1290333544 instance=ExtResource("5_k8f8b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11522293, 1.0789905, -2.441185)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11522293, 1.2926035, -2.441185)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1113057609]
 transform = Transform3D(1, 0, 0, 0, -0.016265793, 0.99986774, 0, -0.99986774, -0.016265793, 0, 11.674833, 0)
@@ -65,7 +68,7 @@ transform = Transform3D(1, 0, 0, 0, -0.016265793, 0.99986774, 0, -0.99986774, -0
 [node name="Layer2" type="Node3D" parent="." unique_id=371797741]
 
 [node name="PortalRenderable" type="MeshInstance3D" parent="Layer2" unique_id=2027275408]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6147637, 1.8603489, -0.8359144)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4782238, 1.8603489, 1.066277)
 mesh = SubResource("CapsuleMesh_k8f8b")
 script = ExtResource("4_qh04p")
 portal_layer_mask = 1
@@ -116,6 +119,12 @@ color = Color(0.74230796, 3.3691526e-07, 0.35686326, 1)
 portal_path = NodePath("../../Portal2")
 overwrite_portal = true
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Layer2/Triangle" unique_id=1530099509]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer2/Triangle/StaticBody3D" unique_id=1854947232]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.010437012, 0)
+shape = SubResource("BoxShape3D_k8f8b")
+
 [node name="Layer1" type="Node3D" parent="." unique_id=171829369]
 
 [node name="Floor" parent="Layer1" unique_id=1075544877 instance=ExtResource("2_0ukcc")]
@@ -125,6 +134,7 @@ mesh = SubResource("PlaneMesh_nt2wp")
 portal_layer_mask = 1
 texture = "res://assets/Sprites/icon.svg"
 color = Color(0.23515096, 0.47566175, 0, 1)
+portal_path = NodePath("../../TravellablePortal")
 
 [node name="Floor" type="StaticBody3D" parent="Layer1/Floor" unique_id=1876439973]
 collision_layer = 15
@@ -160,4 +170,4 @@ shape = SubResource("BoxShape3D_0ukcc")
 
 [node name="Player" parent="." unique_id=1737767770 instance=ExtResource("1_414cb")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4648433, 0.15022075)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4648433, 1.7652216)

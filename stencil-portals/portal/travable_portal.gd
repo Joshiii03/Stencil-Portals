@@ -23,16 +23,18 @@ var player_inside : bool = false :
 			last_player_side = player_side
 		player_inside = new_value
 
-var last_player_side : bool = false :
+var last_player_side : bool = true :
 	set(new_value):
-		if last_player_side != new_value and player_inside:
+		if last_player_side == null:
+			last_player_side = new_value
+		elif last_player_side != new_value:
 			player_changed_side()
 		last_player_side = new_value
 
 
 func _process(_delta: float) -> void:
-	if player_inside:
-		last_player_side = player_side
+	#if player_inside:
+	last_player_side = player_side
 
 
 # Will be called when PortalLayer is changed
@@ -81,11 +83,21 @@ func _on_area_3d_body_exited(body):
 # Is triggered when Player changes side of portal while standing inside.
 # Swaps active PortalLayer
 func player_changed_side():
-	match active_portal_layer:
-		PortalLayers.portal_layer_1:
-			player.change_layer(portal_layer)
-			active_portal_layer = PortalLayers.portal_layer_2
-			
-		PortalLayers.portal_layer_2:
-			player.change_layer(portal_layer_2)
-			active_portal_layer = PortalLayers.portal_layer_1
+	if not player_inside:
+		print("swap")
+		get_tree().call_group("Layer_" + str(portal_layer), "change_side")
+		get_tree().call_group("Layer_" + str(portal_layer_2), "change_side")
+	else:
+		match active_portal_layer:
+			PortalLayers.portal_layer_1:
+				player.change_layer(portal_layer)
+				active_portal_layer = PortalLayers.portal_layer_2
+				
+			PortalLayers.portal_layer_2:
+				player.change_layer(portal_layer_2)
+				active_portal_layer = PortalLayers.portal_layer_1
+
+func _input(event):
+	if event.is_action_pressed("jump"):
+		get_tree().call_group("Layer_" + str(portal_layer), "change_side")
+		get_tree().call_group("Layer_" + str(portal_layer_2), "change_side")

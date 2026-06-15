@@ -23,7 +23,10 @@ stencil_flags = 2
 size = Vector3(2, 2, 0.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggnhr"]
-albedo_color = Color(0.5862609, 0.004099007, 0.9730815, 1)
+depth_draw_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 1.0
+roughness = 0.33
 
 [sub_resource type="TorusMesh" id="TorusMesh_ggnhr"]
 inner_radius = 1.2
