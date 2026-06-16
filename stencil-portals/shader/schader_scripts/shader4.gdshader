@@ -31,8 +31,8 @@ void fragment() {
 		else
 			f = step(0.0 ,z_coord);
 		
-		//if (f < 0.5)
-			//discard;
+		if (f < 0.5)
+			discard;
 		ALPHA *= f;
 	}
 	

@@ -35,17 +35,6 @@ size = Vector3(1, 2, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8f8b"]
 size = Vector3(1, 2.0877686, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klgnm"]
-emission_enabled = true
-emission = Color(0.31100178, 0.54472625, 0.78777057, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_k8f8b"]
-flip_faces = true
-radius = 20.0
-height = 40.0
-radial_segments = 12
-rings = 12
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_nt2wp"]
 size = Vector2(20, 20)
 
@@ -58,10 +47,24 @@ size = Vector2(20, 20)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_k8f8b"]
 radius = 0.2
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_klgnm"]
+radius = 0.2
+
 [sub_resource type="SphereMesh" id="SphereMesh_klgnm"]
 flip_faces = true
-radius = 20.0
-height = 40.0
+radius = 40.0
+height = 80.0
+radial_segments = 12
+rings = 12
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_klgnm"]
+emission_enabled = true
+emission = Color(0.31100178, 0.54472625, 0.78777057, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_k8f8b"]
+flip_faces = true
+radius = 40.0
+height = 80.0
 radial_segments = 12
 rings = 12
 
@@ -81,7 +84,7 @@ visible = false
 material_override = SubResource("StandardMaterial3D_7vc00")
 
 [node name="TravellablePortal" parent="." unique_id=1290333544 instance=ExtResource("5_k8f8b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11522293, 1.2926035, -2.441185)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11522293, 1.2926035, -1.4144374)
 
 [node name="Layer2" type="Node3D" parent="." unique_id=371797741]
 
@@ -138,15 +141,6 @@ transform = Transform3D(1, 0, 0, 0, 0.39291495, 0.91957486, 0, -0.91957486, 0.39
 layers = 2
 light_cull_mask = 4294966274
 
-[node name="Sky" type="MeshInstance3D" parent="Layer2" unique_id=823163398]
-material_override = SubResource("StandardMaterial3D_klgnm")
-mesh = SubResource("SphereMesh_k8f8b")
-script = ExtResource("4_qh04p")
-portal_layer_mask = 2
-color = Color(0.38266158, 0.57687056, 1, 1)
-emit_light = true
-metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
-
 [node name="Layer1" type="Node3D" parent="." unique_id=171829369]
 
 [node name="Floor" parent="Layer1" unique_id=1075544877 instance=ExtResource("2_0ukcc")]
@@ -175,8 +169,23 @@ color = Color(0.654902, 0.57254905, 0, 1)
 portal_path = NodePath("../../Portal")
 overwrite_portal = true
 
-[node name="Cube(1)" parent="Layer1" unique_id=720846969 instance=ExtResource("2_0ukcc")]
-transform = Transform3D(0.9999991, -0.00054485735, 0.0012325381, 0.000551437, 0.9999856, -0.005347706, -0.0012296084, 0.00534838, 0.999985, 0, 1.2851555, -4.857394)
+[node name="Cube(1)2" parent="Layer1" unique_id=720846969 instance=ExtResource("2_0ukcc")]
+transform = Transform3D(0.9999964, -0.0010831142, 0.0024679704, 0.0011094413, 0.99994224, -0.010694575, -0.002456248, 0.010697273, 0.99993986, 1.7358232, 2.9237552, -4.5100965)
+material_override = null
+material_overlay = null
+mesh = SubResource("BoxMesh_nt2wp")
+portal_layer_mask = 1
+color = Color(0.11302628, 0.35715574, 0.8311328, 1)
+portal_path = NodePath("../../TravellablePortal")
+overwrite_portal = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Layer1/Cube(1)2" unique_id=354249319]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer1/Cube(1)2/StaticBody3D" unique_id=1201430503]
+shape = SubResource("BoxShape3D_0ukcc")
+
+[node name="Cube(1)" parent="Layer1" unique_id=2094959014 instance=ExtResource("2_0ukcc")]
+transform = Transform3D(0.9999991, -0.00054485735, 0.0012325381, 0.000551437, 0.9999856, -0.005347706, -0.0012296084, 0.00534838, 0.999985, 0, 1.4489, -4.857394)
 material_override = null
 material_overlay = null
 mesh = SubResource("BoxMesh_nt2wp")
@@ -200,6 +209,11 @@ portal_path = NodePath("../../TravellablePortal")
 overwrite_portal = true
 metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 
+[node name="StaticBody3D" type="StaticBody3D" parent="Layer1/PortalRenderable" unique_id=141657697]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Layer1/PortalRenderable/StaticBody3D" unique_id=2074937774]
+shape = SubResource("CapsuleShape3D_klgnm")
+
 [node name="SpotLight3D" type="SpotLight3D" parent="Layer1" unique_id=1190784530]
 transform = Transform3D(1, 0, 0, 0, -0.017784016, 0.99984187, 0, -0.99984187, -0.017784016, 0, 3.873742, -2.4911213)
 light_color = Color(0.827451, 1, 1, 1)
@@ -207,17 +221,30 @@ light_energy = 2.0
 spot_range = 10.856879
 spot_angle = 65.61467
 
-[node name="Sky" type="MeshInstance3D" parent="Layer1" unique_id=2067748316]
+[node name="Player" parent="." unique_id=1737767770 instance=ExtResource("1_414cb")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4648433, 1.7652216)
+
+[node name="Sky1" type="MeshInstance3D" parent="Player" unique_id=2067748316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4648433, -1.7652216)
 mesh = SubResource("SphereMesh_klgnm")
 script = ExtResource("4_qh04p")
 portal_layer_mask = 1
+texture = "res://assets/Sprites/NightSky.tres"
 portal_path = NodePath("../../TravellablePortal")
 emit_light = true
 metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 
-[node name="Player" parent="." unique_id=1737767770 instance=ExtResource("1_414cb")]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4648433, 1.7652216)
+[node name="Sky2" type="MeshInstance3D" parent="Player" unique_id=823163398]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4648433, -1.7652216)
+material_override = SubResource("StandardMaterial3D_klgnm")
+mesh = SubResource("SphereMesh_k8f8b")
+script = ExtResource("4_qh04p")
+portal_layer_mask = 2
+texture = "res://assets/Sprites/Sky.tres"
+color = Color(0.38266158, 0.57687056, 1, 1)
+emit_light = true
+metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1612647525]
 environment = SubResource("Environment_k8f8b")
