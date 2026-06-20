@@ -10,6 +10,7 @@ extends MeshInstance3D
 @export var overwrite_portal : bool = false
 var portal : Portal
 @export var emit_light : bool = false
+@export var switch_side : bool = false
 
 # When active the Player and the PortalRenderable are in the same PortalLayer.
 # this means the PortalRenderable overwrites the layer so it is infront of Portals.
@@ -67,7 +68,7 @@ func set_layer() -> void:
 			if portal != null:
 				stencil_shader.set_shader_parameter("portal_coords", portal.global_position)
 				stencil_shader.set_shader_parameter("portal_norm", portal.normal)
-				stencil_shader.set_shader_parameter("switch_side", false)
+				stencil_shader.set_shader_parameter("switch_side", switch_side)
 				stencil_shader.set_shader_parameter("use_portal", true)
 			
 			stencil_shader.set_shader_parameter("color", color)

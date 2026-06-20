@@ -74,7 +74,7 @@ ambient_light_source = 1
 [node name="Main" type="Node3D" unique_id=192042535]
 
 [node name="Portal2" parent="." unique_id=809701999 instance=ExtResource("3_nt2wp")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.883606, 1.088702, -3.3167028)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.883606, 1.088702, -1.4410179)
 visible = false
 material_override = SubResource("StandardMaterial3D_k8f8b")
 
@@ -84,7 +84,7 @@ visible = false
 material_override = SubResource("StandardMaterial3D_7vc00")
 
 [node name="TravellablePortal" parent="." unique_id=1290333544 instance=ExtResource("5_k8f8b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11522293, 1.2926035, -1.4144374)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11522293, 1.2926035, -1.9417844)
 
 [node name="Layer2" type="Node3D" parent="." unique_id=371797741]
 
@@ -105,6 +105,7 @@ transform = Transform3D(1, 0, 0, 0, 0.99970657, -0.0242228, 0, 0.0242228, 0.9997
 shape = SubResource("CylinderShape3D_nt2wp")
 
 [node name="Floor" parent="Layer2" unique_id=1236446759 instance=ExtResource("2_0ukcc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0028018951, 4.7683716e-07, 0.020198822)
 material_override = null
 material_overlay = null
 mesh = SubResource("PlaneMesh_qh04p")
@@ -120,15 +121,16 @@ collision_mask = 0
 shape = SubResource("WorldBoundaryShape3D_530py")
 
 [node name="Triangle" parent="Layer2" unique_id=1498245743 instance=ExtResource("2_0ukcc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7017131, 0.94652915, -0.07875192)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7017131, 0.94652915, 2.4942493)
 material_override = null
 material_overlay = null
 mesh = SubResource("PrismMesh_klgnm")
 portal_layer_mask = 2
 texture = "res://assets/Sprites/icon.svg"
 color = Color(0.74230796, 3.3691526e-07, 0.35686326, 1)
-portal_path = NodePath("../../Portal2")
+portal_path = NodePath("../../TravellablePortal")
 overwrite_portal = true
+switch_side = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Layer2/Triangle" unique_id=1530099509]
 

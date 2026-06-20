@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cu2hsx7ujefqv" path="res://portal_renderable/portal_renderable.gd" id="1_2jyq0"]
 [ext_resource type="PackedScene" uid="uid://cd4mqm1rvmyhd" path="res://portal/travable_portal.tscn" id="2_md3ba"]
 [ext_resource type="PackedScene" uid="uid://cps14etqxy0tt" path="res://player/player.tscn" id="3_md3ba"]
+[ext_resource type="PackedScene" uid="uid://g6tt4df7u7lb" path="res://portal_renderable/portal_renderable.tscn" id="4_8mwwp"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_md3ba"]
 size = Vector2(20, 20)
@@ -30,6 +31,25 @@ size = Vector3(3, 4, 2.328125)
 flip_faces = true
 radius = 20.0
 height = 40.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwjse"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+emission_enabled = true
+emission = Color(0.47981286, 0.47981292, 0.47981286, 1)
+stencil_mode = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pft0u"]
+resource_local_to_scene = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_8mwwp"]
+flip_faces = true
+radius = 20.0
+height = 40.0
+
+[sub_resource type="Environment" id="Environment_8mwwp"]
+ambient_light_source = 1
 
 [node name="Tardis" type="Node3D" unique_id=1414513049]
 
@@ -64,6 +84,9 @@ metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Inside/Stair/StaticBody3D" unique_id=1606713206]
 shape = SubResource("BoxShape3D_8mwwp")
 
+[node name="SpotLight3D" type="SpotLight3D" parent="Inside" unique_id=1552554255]
+transform = Transform3D(1, 0, 0, 0, -0.02270484, 0.9997422, 0, -0.9997422, -0.02270484, 0, -0.04645419, -5.9380813)
+
 [node name="Outside" type="Node3D" parent="." unique_id=1890336935]
 
 [node name="Floor" type="MeshInstance3D" parent="Outside" unique_id=1059600240]
@@ -79,13 +102,14 @@ metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 shape = SubResource("WorldBoundaryShape3D_md3ba")
 
 [node name="Box" type="MeshInstance3D" parent="Outside" unique_id=910207140]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28623486, 1.2208989, -4.2160068)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28623486, 1.9950268, -1.9249187)
 mesh = SubResource("BoxMesh_2jyq0")
 script = ExtResource("1_2jyq0")
-portal_layer_mask = 1
+portal_layer_mask = 2
 color = Color(0.16425878, 0, 0.9515695, 1)
 portal_path = NodePath("../../Portal")
 overwrite_portal = true
+switch_side = true
 metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Outside/Box" unique_id=982886046]
@@ -99,18 +123,33 @@ transform = Transform3D(1, 0, 0, 0, 0.17576191, 0.9844328, 0, -0.9844328, 0.1757
 light_energy = 5.531
 light_cull_mask = 4294966274
 
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Outside" unique_id=574991900]
+transform = Transform3D(1, 0, 0, 0, 0.09584576, 0.9953962, 0, -0.9953962, 0.09584576, 0, 12.787201, 0)
+light_cull_mask = 4294966274
+
 [node name="Portal" parent="." unique_id=1290333544 instance=ExtResource("2_md3ba")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23759335, 1.3403004, 0.071017206)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23759335, 1.3403004, -0.18153733)
 
 [node name="Player" parent="." unique_id=1737767770 instance=ExtResource("3_md3ba")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6769195, 2.1148834, -1.9286666)
 
-[node name="PortalRenderable" type="MeshInstance3D" parent="Player" unique_id=643088544]
+[node name="InsideWall" type="MeshInstance3D" parent="Player" unique_id=643088544]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.005877495, 0.07534599, -0.25772238)
 mesh = SubResource("SphereMesh_md3ba")
 script = ExtResource("1_2jyq0")
 portal_layer_mask = 1
-texture = "res://assets/Sprites/grass.tres"
-color = Color(0.0044986852, 0.1764257, 0.78820646, 1)
+color = Color(0.18609995, 0.13946778, 0.48633915, 1)
 emit_light = true
 metadata/_custom_type_script = "uid://cu2hsx7ujefqv"
+
+[node name="Sky" parent="Player" unique_id=720846969 instance=ExtResource("4_8mwwp")]
+material_override = SubResource("StandardMaterial3D_uwjse")
+material_overlay = SubResource("ShaderMaterial_pft0u")
+mesh = SubResource("SphereMesh_8mwwp")
+portal_layer_mask = 2
+texture = "res://assets/Sprites/Sky.tres"
+portal_path = NodePath("../../Portal")
+emit_light = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2009028628]
+environment = SubResource("Environment_8mwwp")

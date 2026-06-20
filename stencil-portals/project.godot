@@ -19,10 +19,6 @@ config/icon="res://assets/Sprites/icon.svg"
 
 NodeRegistry="*uid://dtvbha164a03b"
 
-[display]
-
-window/size/mode=3
-
 [global_group]
 
 Portal=""
